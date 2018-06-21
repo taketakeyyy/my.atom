@@ -20,17 +20,21 @@
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 '.source.python':
-  'Default Format':
-    'prefix': 'default_format'
-    'body': """
-# -*- coding:utf-8 -*-
+  'Encoding Declaration':
+    'prefix': 'coding-declaration-utf8'
+    'body': '# -*- coding:utf-8 -*-'
 
+  'Make Entry Point':
+    'prefix': 'if__name__=="__main__"'
+    'body': """
 if __name__ == "__main__":
 	$1
 """
+
   'Int-Input':
     'prefix': 'int_input'
     'body': 'int(input())'
+
   'List-Int-Input':
     'prefix': 'list_int_input'
     'body': 'list(map(int, input().split()))'
