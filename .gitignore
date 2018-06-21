@@ -1,0 +1,14 @@
+storage
+compile-cache
+dev
+.npm
+.node-gyp
+
+
+# Ignore all files
+*
+
+# Dont ignore following files
+!/.gitignore
+
+!/snippets.cson
