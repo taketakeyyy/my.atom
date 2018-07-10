@@ -31,6 +31,7 @@ if __name__ == "__main__":
 	$1
 """
 
+# Input
   'Int-Input':
     'prefix': 'int_input'
     'body': 'int(input())'
@@ -38,3 +39,11 @@ if __name__ == "__main__":
   'List-Int-Input':
     'prefix': 'list_int_input'
     'body': 'list(map(int, input().split()))'
+
+# Make List
+  'Make 2d-list':
+    'prefix': 'make_2dlist'
+    'body': """
+def make_2dlist(N, M, v=0):
+    return [[v for m in range(M)] for n in range(N)]
+"""
