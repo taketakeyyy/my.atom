@@ -47,3 +47,18 @@ if __name__ == "__main__":
 def make_2dlist(N, M, v=0):
     return [[v for m in range(M)] for n in range(N)]
 """
+
+# Make array
+  'Make 2d-array':
+    'prefix': 'make_2darray'
+    'body': """
+def make_2darray(N, M, v=0):
+    \""" Return array[N][M]
+    [args]
+      v: initial values
+    [*Required*]
+      import numpy as np
+    \"""
+    import numpy as np
+    return np.array([[v for m in range(M)] for n in range(N)])
+"""
