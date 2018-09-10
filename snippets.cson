@@ -20,6 +20,11 @@
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 '.source.python':
+# rules
+    # imethod: instance method
+    # cmethod: class method
+
+# common
     'Encoding Declaration':
         'prefix': 'coding-declaration-utf8'
         'body': '# -*- coding:utf-8 -*-'
@@ -150,12 +155,11 @@
         'prefix': 'itertools_chain'
         'body': 'itertools.chain(${1:iterables})'
 
-    'itertools.chain.from_iterable':
-        # classmethod
+    'cmethod: itertools.chain.from_iterable':
         # リストを渡せば、chain()と同等のことをする
         # chain.from_iterable(['ABC', 'DEF']) --> A B C D E F
         'prefix': 'itertools_chain_from_iterable'
-        'body': 'chain.from_iterable(${1:iterable})'
+        'body': 'itertools.chain.from_iterable(${1:iterable})'
 
     'itertools.compress':
         # data の要素から selectors の対応する要素が True と評価されるものだけを
@@ -257,21 +261,42 @@
 
 
 # collections
-    'collections.Counter()':
+    # https://docs.python.jp/3/library/collections.html
+
+    'class: collections.Counter()':
         # https://docs.python.jp/3/library/collections.html#collections.Counter
         # key:要素、value:カウント数、の辞書を作成する
-        # collections.Counter(['a','a','b','c','d']) --> {'a': 2, 'b': 1, 'c': 1, 'd': 1}
-        'prefix': 'collections_counter'
+        # collections.Counter("aabcd")
+        # collections.Counter(['a','a','b','c','d'])
+        #   --> {'a': 2, 'b': 1, 'c': 1, 'd': 1}
+        'prefix': 'collections_Counter'
         'body': """
-            collections.Counter(${1:iterable-or-mapping})
+            ${1:dict} = collections.Counter(${2:iterable-or-mapping})
         """
 
-    'method: colections.Counter.most_common()':
-        'prefix': 'collections_counter_most_common'
-        'body': """
-            most_common(${1:n})
-        """
+    'imethod: collections_Counter().elements()':
+        # それぞれの要素を、そのカウント分の回数だけ繰り返すイテレータを返す
+        # c = Counter(a=4, b=2, c=0, d=-2)
+        # sorted(c.elements())
+        #   --> ['a', 'a', 'a', 'a', 'b', 'b']
+        'prefix': 'collections_Counter_elements'
+        'body': '${1:collections.Counter()}.elements()'
 
+    'imethod: colections.Counter().most_common()':
+        # 最も多い n 要素を、カウントが多いものから順に並べたリストを返す
+        # Counter('abracadabra').most_common(3)
+        #   --> [('a', 5), ('r', 2), ('b', 2)]
+        'prefix': 'collections_Counter_most_common'
+        'body': '${1:collections.Counter()}.most_common(${2:n})'
+
+    'imethod: collections.Counter().subtract()':
+        # 要素から iterable または mapping の要素が引かれる。
+        # c1 = Counter(a=4, b=2, c=0, d=-2)
+        # c2 = Counter(a=1, b=2, c=3, d=4)
+        # c1.subtract(c2)
+        #   --> Counter({'a': 3, 'b': 0, 'c': -3, 'd': -6})
+        'prefix': 'collections_Counter_subtract'
+        'body': '${1:collections.Counter()}.subtract(${2:iterable-or-mapping})'
 
 
 #####################################################################
