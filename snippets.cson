@@ -41,27 +41,6 @@
         'prefix': 'list_int_input'
         'body': 'list(map(int, input().split()))'
 
-# def
-    'def make 2d-list':
-        'prefix': 'def_make_2dlist'
-        'body': """
-        def make_2dlist(N, M, v=0):
-            return [[v for m in range(M)] for n in range(N)]
-        """
-
-    'def make 2d-array':
-        'prefix': 'def_make_2darray'
-        'body': """
-        def make_2darray(N, M, v=0):
-                \""" Return array[N][M]
-                [args]
-                    v: initial values
-                [*Required*]
-                    import numpy as np
-                \"""
-                import numpy as np
-                return np.array([[v for m in range(M)] for n in range(N)])
-        """
 
 # math
     '階乗計算':
@@ -74,22 +53,63 @@
         'body': 'math.factorial(${n})'
 
 
+# list
+    '2次元リストを作成する':
+        # [[0 for m in range(3)] for n in range(2)]
+        #   --> [[0,0,0], [0,0,0]]
+        'prefix': 'list_2d'
+        'body': '${1:list} = [[0 for m in range(${2:M})] for n in range(${3:N})]'
+
+
+# np
+    # import numpy as np
+
+    '2次元のndarray行列を作成する':
+        # np.array([[0 for m in range(3)] for n in range(2)])
+        #   --> [[0 0 0]
+        #        [0 0 0]]
+        'prefix': 'np_array_2d'
+        'body': '${1:array} = np.array([[0 for m in range(${2:M})] for n in range(${3:N})]]'
+
+    '2次元のmat行列を作成する':
+        # np.mat([[0 for m in range(3)] for n in range(2)])
+        #   --> [[0 0 0]
+        #        [0 0 0]]
+        'prefix': 'np_matrix_2d'
+        'body': '${1:mat} = np.mat([[0 for m in range(${2:M})] for n in range(${3:N})]]'
+
 # sort
     'sort dictionary(key ascending)':
+        # 辞書のkeyで昇順ソートし、リストで返す
+        # d = {"apple":1, "cheese":2, "bread":3, "donut": 4}
+        # sorted(d.items(), key=lambda x: x[0])
+        #   --> [('apple', 1), ('bread', 3), ('cheese', 2), ('donut', 4)]
         'prefix': 'sorted_dict_key_ascending'
         'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[0])'
 
     'sort dictionary(key descending)':
+        # 辞書のkeyで降順ソートし、リストで返す
+        # d = {"apple":1, "cheese":2, "bread":3, "donut": 4}
+        # sorted(d.items(), key=lambda x: x[0], reverse=True)
+        #   --> [('donut', 4), ('cheese', 2), ('bread', 3), ('apple', 1)]
         'prefix': 'sorted_dict_key_descending'
-        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: -x[0])'
+        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[0], reverse=True)'
 
     'sort dictionary(velue ascending)':
+        # 辞書のvalueで昇順ソートし、リストで返す
+        # d = {"apple":1, "cheese":2, "bread":3, "donut": 4}
+        # sorted(d.items(), key=lambda x: x[1])
+        #   --> [('apple', 1), ('cheese', 2), ('bread', 3), ('donut', 4)]
         'prefix': 'sorted_dict_value_ascending'
         'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[1])'
 
     'sort dictionary(value descending)':
+        # 辞書のvalueで降順ソートし、リストで返す
+        # d = {"apple":1, "cheese":2, "bread":3, "donut": 4}
+        # sorted(d.items(), key=lambda x: x[1], reverse=True)
+        #   --> [('donut', 4), ('bread', 3), ('cheese', 2), ('apple', 1)]
         'prefix': 'sorted_dict_value_descending'
-        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: -x[1])'
+        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[1], reverse=True)'
 
 # itertools
     # https://docs.python.jp/3/library/itertools.html#module-itertools
