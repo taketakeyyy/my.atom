@@ -20,45 +20,244 @@
 # Atom Flight Manual:
 # https://atom.io/docs/latest/using-atom-basic-customization#cson
 '.source.python':
-  'Encoding Declaration':
-    'prefix': 'coding-declaration-utf8'
-    'body': '# -*- coding:utf-8 -*-'
+    'Encoding Declaration':
+        'prefix': 'coding-declaration-utf8'
+        'body': '# -*- coding:utf-8 -*-'
 
-  'Make Entry Point':
-    'prefix': 'if__name__=="__main__"'
-    'body': """
-if __name__ == "__main__":
-	$1
-"""
+    'Make Entry Point':
+        'prefix': 'if__name__=="__main__"'
+        'body': """
+        if __name__ == "__main__":
+            $1
+        """
+
 
 # Input
-  'Int-Input':
-    'prefix': 'int_input'
-    'body': 'int(input())'
+    'Int-Input':
+        'prefix': 'int_input'
+        'body': 'int(input())'
 
-  'List-Int-Input':
-    'prefix': 'list_int_input'
-    'body': 'list(map(int, input().split()))'
+    'List-Int-Input':
+        'prefix': 'list_int_input'
+        'body': 'list(map(int, input().split()))'
 
-# Make List
-  'Make 2d-list':
-    'prefix': 'make_2dlist'
-    'body': """
-def make_2dlist(N, M, v=0):
-    return [[v for m in range(M)] for n in range(N)]
-"""
+# def
+    'def make 2d-list':
+        'prefix': 'def_make_2dlist'
+        'body': """
+        def make_2dlist(N, M, v=0):
+            return [[v for m in range(M)] for n in range(N)]
+        """
 
-# Make array
-  'Make 2d-array':
-    'prefix': 'make_2darray'
-    'body': """
-def make_2darray(N, M, v=0):
-    \""" Return array[N][M]
-    [args]
-      v: initial values
-    [*Required*]
-      import numpy as np
-    \"""
-    import numpy as np
-    return np.array([[v for m in range(M)] for n in range(N)])
-"""
+    'def make 2d-array':
+        'prefix': 'def_make_2darray'
+        'body': """
+        def make_2darray(N, M, v=0):
+                \""" Return array[N][M]
+                [args]
+                    v: initial values
+                [*Required*]
+                    import numpy as np
+                \"""
+                import numpy as np
+                return np.array([[v for m in range(M)] for n in range(N)])
+        """
+
+# math
+    '階乗計算':
+        'prefix': 'kaijou'
+        'body': 'math.factorial(${n})'
+
+    'math_factorial（階乗計算）':
+        # n! = n * (n-1) * ... * 1
+        'prefix': 'math_factorial'
+        'body': 'math.factorial(${n})'
+
+
+# sort
+    'sort dictionary(key ascending)':
+        'prefix': 'sorted_dict_key_ascending'
+        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[0])'
+
+    'sort dictionary(key descending)':
+        'prefix': 'sorted_dict_key_descending'
+        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: -x[0])'
+
+    'sort dictionary(velue ascending)':
+        'prefix': 'sorted_dict_value_ascending'
+        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[1])'
+
+    'sort dictionary(value descending)':
+        'prefix': 'sorted_dict_value_descending'
+        'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: -x[1])'
+
+# itertools
+    # https://docs.python.jp/3/library/itertools.html#module-itertools
+
+    'itertools.count':
+        # 数startで始まる等間隔の値を返すイテレータを作成する
+        # count(10) --> 10 11 12 13 14 ...
+        # count(2.5, 0.5) --> 2.5 3.0 3.5 ...
+        'prefix': 'itertools_count'
+        'body': 'itertools.count(${1:start=0}, ${2:step=1})'
+
+    'itertools.cycle':
+        # iterableから要素を取得し、無限に返すイテレータを作成する
+        # cycle('ABCD') --> A B C D A B C D A B C D ...
+        'prefix': 'itertools_cycle'
+        'body': 'itertools.cycle(${1:iterable})'
+
+    'itertools.repeat':
+        # 繰り返しobjectを返すイテレータを、times回作成する
+        # repeat(10, 3) --> 10 10 10
+        # repeat(['a', 'b', 'c']) --> ['a', 'b', 'c'], ['a', 'b', 'c'], ...
+        # list(map(pow, range(10), repeat(2))) --> [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+        'prefix': 'itertools_repeat'
+        'body': 'itertools.repeat(${1:object}, ${2:times=None})'
+
+    'itertools.accumulate':
+        # 累積結果を返すイテレータを作成する
+        # func引数のデフォルトは+演算の関数。つまりここにoperator.mulを渡せば*演算になる
+        # accumulate([1,2,3,4,5]) --> 1 3 6 10 15
+        # accumulate([1,2,3,4,5], operator.mul) --> 1 2 6 24 120
+        'prefix': 'itertools_accumulate'
+        'body': 'itertools.accumulate(${1:iterable}, ${2:func=operator.add})'
+
+    'itertools.chain':
+        # 先頭の iterable の全要素を返し、次に2番目を返し、と
+        # 全 iterable の要素を返すイテレータを作成する
+        # chain('ABC', 'DEF') --> A B C D E F
+        'prefix': 'itertools_chain'
+        'body': 'itertools.chain(${1:iterables})'
+
+    'itertools.chain.from_iterable':
+        # classmethod
+        # リストを渡せば、chain()と同等のことをする
+        # chain.from_iterable(['ABC', 'DEF']) --> A B C D E F
+        'prefix': 'itertools_chain_from_iterable'
+        'body': 'chain.from_iterable(${1:iterable})'
+
+    'itertools.compress':
+        # data の要素から selectors の対応する要素が True と評価されるものだけを
+        # フィルタしたイテレータを作る。
+        # data と selectors のいずれかが尽きたときに止まる。
+        # compress('ABCDEF', [1,0,1,0,1,1]) --> A C E F
+        'prefix': 'itertools_compress'
+        'body': 'itertools.compress(${1:data}, ${2:selectors})'
+
+    'itertools.takewhile':
+        # predicate（述語）がTrueである限りiterableから要素を返すイテレータを作成する
+        # takewhile(lambda x: x<5, [1, 4, 6, 4, 1]) --> 1 4
+        'prefix': 'itertools_takewhile'
+        'body': 'itertools.takewhile(${1:predicate}, ${2:iterable})'
+
+    'itertools.dropwhile':
+        # predicateが最初にFalseになるその後のすべての要素を
+        # 返すイテレータを作成する
+        # dropwhile(lambda x: x<5, [1, 4, 6, 4, 1]) --> 6 4 1
+        'prefix': 'itertools_dropwhile'
+        'body': 'itertools.dropwhile(${1:predicaet}, ${2:iterable})'
+
+    'itertools.filterfalse':
+        # predicateがFalseとなる要素だけを返すイテレータを作成する
+        # filterfalse(lambda x: x%2, range(10)) --> 0 2 4 6 8
+        'prefix': 'itertools_filterfalse'
+        'body': 'itertools.filterfalse(${1:predicate}, ${2:iterable})'
+
+    'itertools.groupby':
+        # 同じkeyを持つ要素からなるiterable中のグループに対して、
+        # keyとグループを返すイテレータを作成する
+        # s = 'AAAABBBCCDAABBB'
+        # [k for k, g in groupby(s)] --> 'A' 'B' 'C' 'D' 'A' 'B'
+        # [list(g) for k, g in groupby(s)] --> ['A','A','A','A'] ['B','B','B'] ['C','C'] ['D']
+        'prefix': 'itertools_groupby'
+        'body': 'itertools.groupby(${1:iterable}, ${2:key=None})'
+
+    'itertools.islice':
+        # s = "ABCDEFG"
+        # islice(s, 2) --> 'A' 'B'
+        # islice(s, 2, 4) --> 'C' 'D'
+        # islice(s, 2, None) --> 'C' 'D' 'E' 'F' 'G'
+        # islice(s, 0, None, 2) --> 'A' 'C' 'E' 'G'
+        'prefix': 'itertools_islice'
+        'body': 'itertools.islice(${1:iterable}, ${2:start}, ${3:stop}, ${4:step=None})'
+
+    'itertools.starmap':
+        # iterableの要素を引数としてfunctionを計算するイテレータを作成する
+        # mapとstarmapの違いは、function(a, b)とfunction(*c)の差に似ている
+        # starmap(pow, [(2,5), (3,2), (10,3)]) --> 32 9 1000
+        'prefix': 'itertools_starmap'
+        'body': 'itertools.starmap(${1:function}, ${2:iterable})'
+
+    'itertools.tee':
+        # 一つのiterableからn個の独立したイテレータを返す
+        # tee("ABC", 3) --> ['A','B','C'], ['A','B','C'], ['A','B','C']
+        'prefix': 'itertools_tee'
+        'body': 'itertools.tee(${1:iterable}, ${2:n=2})'
+
+    'itertools.zip_longest':
+        # 各iterableの要素をまとめるイテレータを作成する
+        # iterableの長さが違う場合、足りない値はfillvalueで埋める
+        # zip_longest('ABCD', 'xy', fillvalue='-') --> ('A','x') ('B','y') ('C','-') ('D','-')
+        'prefix': 'itertools_zip_longest'
+        'body': 'itertools.zip_longest(${1:iterable}, ${2:fillvalue=None})'
+
+    'itertools.combinations':
+        # nCr := n! / r!(n-r)!
+        # いわゆる組み合わせのパターンを返す
+        # 入力iterableの要素からなる長さrの部分列を返す
+        # combinations('ABCD', 2) --> ('A','B') ('A','C') ('A','D') ('B','C') ('B','D') ('C','D')
+        # combinations(range(4), 3) --> (0,1,2) (0,1,3) (0,2,3) (1,2,3)
+        'prefix': 'itertools_combinations'
+        'body': 'itertools.combinations(${1:iterable}, ${2:r})'
+
+    'itertools.combinations_with_replacement':
+        # 重複ありの組み合わせパターンを返す
+        # 入力 iterable から、それぞれの要素が複数回現れることを許して、長さ r の要素の部分列を返します。
+        # combinations_with_replacement('ABCD', 2) --> ('A','A') ('A','B') ('A','C') ('A','D') ('B','B') ('B','C') ('B','D') ('C','C') ('C','D') ('D','D')
+        'prefix': 'itertools_combinations_with_replacement'
+        'body': 'itertools.combinations_with_replacement(${1:iterable}, ${2:r})'
+
+    'itertools.permutations(順列)':
+        # 順列の公式: nPk = n!/(n-k)!
+        # iterableの要素からなる長さrの順列を連続的に返す
+        # permutations('ABCD', 2) --> ('A','B') ('A','C') ('A','D') ('B','A') ('B','C') ('B','D') ('C','A') ('C','B') ('C','D') ('D','A') ('D','B') ('D','C')
+        # permutations(range(3)) --> (0,1,2) (0,2,1) (1,0,2) (1,2,0) (2,0,1) (2,1,0)
+        'prefix': 'itertools_permutations'
+        'body': 'itertools.permutations(${1:iterable}, ${2:r=None})'
+
+    'itertools.product(重複順列・デカルト積)':
+        # iterableのデカルト積を返す
+        # product('ABCD', 'xy')
+        #   --> ('A','x') ('A','y') ('B','x') ('B','y') ('C','x') ('C','y') ('D','x') ('D','y')
+        # product(range(2), repeat=3)
+        #   --> (0,0,0) (0,0,1) (0,1,0) (0,1,1) (1,0,0) (1,0,1) (1,1,0) (1,1,1)
+        'prefix': 'itertools_product'
+        'body': 'itertools.product(${1:iterable}, ${2:repeat=1})'
+
+
+# collections
+    'collections.Counter()':
+        # https://docs.python.jp/3/library/collections.html#collections.Counter
+        # key:要素、value:カウント数、の辞書を作成する
+        # collections.Counter(['a','a','b','c','d']) --> {'a': 2, 'b': 1, 'c': 1, 'd': 1}
+        'prefix': 'collections_counter'
+        'body': """
+            collections.Counter(${1:iterable-or-mapping})
+        """
+
+    'method: colections.Counter.most_common()':
+        'prefix': 'collections_counter_most_common'
+        'body': """
+            most_common(${1:n})
+        """
+
+
+
+#####################################################################
+# PHP
+#####################################################################
+'.text.html.basic, .text.html.php':
+    'php_error_log':
+        'prefix': 'error_log'
+        'body': 'error_log(print_r($array,true),"3","/var/log/php_debug.log");'
