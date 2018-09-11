@@ -282,7 +282,7 @@
         'prefix': 'collections_Counter_elements'
         'body': '${1:collections.Counter()}.elements()'
 
-    'imethod: colections.Counter().most_common()':
+    'imethod: collections.Counter().most_common()':
         # 最も多い n 要素を、カウントが多いものから順に並べたリストを返す
         # Counter('abracadabra').most_common(3)
         #   --> [('a', 5), ('r', 2), ('b', 2)]
