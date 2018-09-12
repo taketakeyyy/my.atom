@@ -47,6 +47,8 @@
         'body': 'list(map(int, input().split()))'
 
 # Built-in function
+    # https://docs.python.jp/3/library/functions.html
+
     'abs':
         # 絶対値を返す
         # print(abs(-10)) --> 10
@@ -117,6 +119,18 @@
         # chr(8364) --> '€'
         'prefix': 'chr'
         'body': 'chr(${i})'
+
+    'max':
+        # iterable の中で最大の要素、または2つ以上の引数の中で最大のものを返します。
+        # max(arg1, arg2, *args[, key])
+        'prefix': 'max'
+        'body': 'max(${1:arg1}, ${2:arg2})'
+
+    'min':
+        # iterable の中で最小の要素、または2つ以上の引数の中で最小のものを返します。
+        # min(arg1, arg2, *args[, key])
+        'prefix': 'min'
+        'body': 'min(${1:arg1}, ${2:arg2})'
 
     'zip':
         # それぞれの iterable から要素を集めたイテレータを作成する
