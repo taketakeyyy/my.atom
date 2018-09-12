@@ -46,6 +46,96 @@
         'prefix': 'list_int_input'
         'body': 'list(map(int, input().split()))'
 
+# Built-in function
+    'abs':
+        # 絶対値を返す
+        # print(abs(-10)) --> 10
+        # print(abs(-10.0)) --> 10.0
+        # print(abs(6j)) --> 6.0
+        # print(abs(3+1j)) --> 3.1622776601683795
+        'prefix': 'abs'
+        'body': 'abs(${1:x})'
+
+    'all':
+        # iterable のすべての要素がTrue（または空）ならばTrueを返す
+        # all([True, True, True]) --> True
+        # all([]) --> True
+        # all(['Alice', 'Bob', 'Charlie']) --> True
+        # all([24, 0, 18]) --> False
+        'prefix': 'all'
+        'body': 'all(${1:iterable})'
+
+    'any':
+        # iterable のいずれかの要素がTrueならばTrueを返す。空ならFalseを返す
+        # any([True, False, False]) --> True
+        # any([]) --> False
+        # any(['Alice', 'Bob', 'Charlie']) --> True
+        # any([24, 0, 18]) --> True
+        'prefix': 'any'
+        'body': 'any(${1:iterable})'
+
+    'ascii':
+        # オブジェクトの印字可能な表現を含む文字列を返すが、repr() によって返された
+        # 文字列中の非 ASCII 文字は \x 、 \u 、 \U エスケープを使ってエスケープされる
+        # ascii("aiueo") --> 'aiueo'  (実際に'が付くので注意)
+        # ascii("あいうえお") --> '\u3042\u3044\u3046\u3048\u304a'
+        'prefix': 'ascii'
+        'body': 'ascii(${object})'
+
+    'bin':
+        # 整数を先頭に "0b" が付いた 2 進文字列に変換する。
+        # 0b11 --> 3
+        # bin(3) --> 0b11
+        # bin(-3) --> -0b11
+        # bin(3.0) --> TypeError
+        'prefix': 'bin'
+        'body': 'bin(${x})'
+
+    'oct':
+        # 整数を先頭に "0o" が付いた 8 進数文字列に変換する。
+        # 0o11 --> 9
+        # oct(9) --> 0o11
+        # oct(-9) --> -0o11
+        # oct(9.0) --> TypeError
+        'prefix': 'oct'
+        'body': 'oct(${x})'
+
+    'hex':
+        # 整数を先頭に "0x" が付いた 16 進数文字列に変換する。
+        # 0x11 --> 17
+        # hex(17) --> 0x11
+        # hex(-17) --> -0x11
+        # hex(17.0) --> TypeError
+        'prefix': 'hex'
+        'body': 'hex(${x})'
+
+    'chr':
+        # Unicode コードポイントが整数 i である文字を表す文字列を返す
+        # 引数の有効な範囲は 0 ～ 1,114,111 (0x10FFFF) です
+        # i が範囲外の場合 ValueError が送出されます
+        # chr(97) --> 'a'
+        # chr(8364) --> '€'
+        'prefix': 'chr'
+        'body': 'chr(${i})'
+
+    'zip':
+        # それぞれの iterable から要素を集めたイテレータを作成する
+        # zip([1,2,3], [4,5,6]) --> (1,4) (2,5) (3,6)
+        # zip([1,2,3], [4,5]) --> (1,4) (2,5)
+        # zip([1,2,3], [4,5,6], [7,8,9]) --> (1,4,7) (2,5,8) (3,6,9)
+        'prefix': 'zip'
+        'body': 'zip(${*iterables})'
+
+    '@classmethod':
+        # メソッドをクラスメソッドへ変換するデコレータ
+        # インスタンスメソッドが暗黙の第一引数としてインスタンスをとるように、
+        # 第一引数としてクラスをとります。
+        # class C:
+        #     @classmethod
+        #     def func(cls, arg1, arg2, ...): ...
+        'prefix': 'classmethod'
+        'body': '@classmethod'
+
 
 # math
     '階乗計算':
