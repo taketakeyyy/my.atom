@@ -132,6 +132,15 @@
         'prefix': 'min'
         'body': 'min(${1:arg1}, ${2:arg2})'
 
+    'sum':
+        # sum(iterable[, start])
+        # start と iterable の要素を左から右へ合計し、総和を返します。 start はデフォルトで 0 です。
+        # sum([1,2,3]) --> 6
+        # sum([1,2,3], 10) --> 16
+        # sum([True, True, False]) --> 2
+        'prefix': 'sum'
+        'body': 'sum(${1:iterable})'
+
     'zip':
         # それぞれの iterable から要素を集めたイテレータを作成する
         # zip([1,2,3], [4,5,6]) --> (1,4) (2,5) (3,6)
