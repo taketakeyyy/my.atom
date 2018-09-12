@@ -388,6 +388,24 @@
         'prefix': 'collections_Counter_subtract'
         'body': '${1:collections.Counter()}.subtract(${2:iterable-or-mapping})'
 
+# timeit
+    # https://docs.python.jp/3.6/library/timeit.html#module-timeit
+
+    'timeit.timeit':
+        # timeit.timeit(stmt='pass', setup='pass', timer=<default timer>, number=1000000, globals=None)
+        # 与えられたstmt、setup コードおよび timer 関数で Timer インスタンスを作成し、
+        # その timeit() メソッドを number 回実行します。
+        # 任意の globals 引数はコードを実行する名前空間を指定します。
+        # def test(N):
+        #     return sum(range(N))
+        # n = 10000
+        # loop = 1000
+        # result = timeit.timeit('test(n)', globals=globals(), number=loop)
+        # print(result / loop) --> 0.0002666301020071842
+        'prefix': 'timeit_timeit'
+        'body': """
+            timeit.timeit(stmt=${1:'pass'}, setup=${2:'pass'}, timer=${3:<default timer>}, number=${4:1000000}, globals=${5:None})
+        """
 
 #####################################################################
 # PHP
