@@ -25,16 +25,19 @@
     # cmethod: class method
 
 # common
-    'Encoding Declaration':
-        'prefix': 'coding-declaration-utf8'
-        'body': '# -*- coding:utf-8 -*-'
 
-    'Make Entry Point':
-        'prefix': 'if__name__=="__main__"'
-        'body': """
-        if __name__ == "__main__":
-            $1
-        """
+    # enc で出る
+#    'Encoding Declaration':
+#        'prefix': 'coding-declaration-utf8'
+#        'body': '# -*- coding:utf-8 -*-'
+
+    # ifmain で出る
+#    'Make Entry Point':
+#        'prefix': 'if__name__=="__main__"'
+#        'body': """
+#        if __name__ == "__main__":
+#            $1
+#        """
 
 
 # Input
@@ -83,6 +86,13 @@
         # ascii("あいうえお") --> '\u3042\u3044\u3046\u3048\u304a'
         'prefix': 'ascii'
         'body': 'ascii(${object})'
+
+    'eval':
+        # eval(expression, globals=None, locals=None)
+        # x = 1
+        # eval("x+1") --> 2
+        'prefix': 'eval'
+        'body': 'eval(${1:expression})'
 
     'bin':
         # 整数を先頭に "0b" が付いた 2 進文字列に変換する。
