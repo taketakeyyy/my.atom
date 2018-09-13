@@ -39,6 +39,83 @@
 #            $1
 #        """
 
+# My functions
+
+    # 数列の公式
+    'Sum of arithmetic series（等差数列の和）':
+        # 等差数列の公式
+        # 初項が a，末項が l，項数が n であるような等差数列の和は，(n(a+l))/2
+        'prefix': 'ari_series'
+        'body': 'ari_series = lambda a, l, n: n * (a + l) / 2'
+
+    'Sum of geometric series（等比数列の和）':
+        # 等比数列の公式
+        # 初項が a，公比 r，項数 n の等比数列の和は（r≠1 のもとで），a(1−r^n)/(1−r)
+        'prefix': 'geo_series'
+        'body': 'geo_series = lambda a, r, n: a * (1 - r**n) / (1 - r)'
+
+    # 無限数列の公式
+    'Sum of infinite geometric series（無限等比級数の和）':
+        # 無限等比級数の公式
+        # 初項が a，公比 r，の無限等比級数の和は（ただし、|r|<1）,
+        # ∑(k=0,∞)(ar^k) = a + ar + ar^2 ⋯ = a /(1−r)
+        # inf_geo_series_a(1,1/2) --> 2.0
+        'prefix': 'inf_geo_series_a'
+        'body': 'inf_geo_series_a = lambda a, r: a/(1-r)'
+
+    'Sum of infinite geometric series（無限等比級数の和の応用 k）':
+        # 無限等比級数の和の応用（ただし、|r|<1）,
+        # ∑(k=1,∞)(kr^k) = r + 2r^2 + 3r^3 + ⋯ = r / (1-r)^2
+        # inf_geo_series_k(1/2) --> 2.0
+        'prefix': 'inf_geo_series_k'
+        'body': 'inf_geo_series_k = lambda r: r/(1-r)**2'
+
+    'Sum of infinite geometric series（無限等比級数の和の応用 k^2）':
+        # 無限等比級数の和の応用（ただし、|r|<1）,
+        # ∑(k=1,∞)(k^2 * r^k) = r + 4r^2 + 9r^3 + ⋯ = (r+r^2)/(1-r)^3
+        # inf_geo_series_k2(1/2) --> 6.0
+        'prefix': 'inf_geo_series_k^2'
+        'body': 'inf_geo_series_k2 = lambda r: (r+r**2)/(1-r)**3'
+
+    # テイラー展開
+    # https://syarunikki.com/taylor-expansion/
+    # https://mathwords.net/mugenwa
+    # http://eman-physics.net/math/taylor.html
+    # f(x) = f(a) + f'(a)(x-a) + 1/2! f''(a)(x-a)^2 + ⋯
+    'Sum of Taylor series（テイラー級数_e^x）':
+        # ∑(k=0,∞)(x^k/k!) = 1 + x + x^2/2 + x^3/6 + ⋯ = e^x
+        'prefix': 'taylor_series'
+        'body': 'taylor_series = math.exp(x)'
+
+    'Sum of Taylor series（テイラー級数_sinx）':
+        # ∑(k=0,∞)((-1)^k * x^(2k+1) / (2k+1)!) = x - x^3/6 + x^5/120 + ⋯ = sin(x)
+        'prefix': 'taylor_series_2'
+        'body': 'taylor_series = math.sin(x)'
+
+    # 逆数のべき乗の和（ゼータ関数）
+    'Sum of infinite powers of reciprocals (zeta function k)':
+        # 逆数の和
+        # ∑(k=1,∞)(1/k) = 1/1 + 1/2 + 1/3 + ⋯ = float("inf")
+        'prefix': 'zeta_func_k'
+        'body': 'zeta_k = float("inf")' # 3.5以降、 math.inf 可能
+
+    'Sum of infinite powers of reciprocals (zeta function k2)':
+        # 逆数のべき乗の和（ゼータ関数）
+        # ∑(k=1,∞)(1/k^2) = 1/1^2 + 1/2^2 + 1/3^2 + ⋯ = π^2/6
+        'prefix': 'zeta_func_k2'
+        'body': 'zeta_k2 = math.pi**2/6'
+
+    'Sum of infinite powers of reciprocals (zeta function k4)':
+        # 逆数のべき乗の和（ゼータ関数）
+        # ∑(k=1,∞)(1/k^4) = 1/1^4 + 1/2^4 + 1/3^4 + ⋯ = π^4/90
+        'prefix': 'zeta_func_k4'
+        'body': 'zeta_k2 = math.pi**4/90'
+
+    'Sum of infinite powers of reciprocals (zeta function k6)':
+        # 逆数のべき乗の和（ゼータ関数）
+        # ∑(k=1,∞)(1/k^6) = 1/1^6 + 1/2^6 + 1/3^6 + ⋯ = π^6/945
+        'prefix': 'zeta_func_k6'
+        'body': 'zeta_k2 = math.pi**6/945'
 
 # Input
     'Int-Input':
