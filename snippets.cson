@@ -39,6 +39,10 @@
 #            $1
 #        """
 
+    'defmain':
+        'prefix': 'Snippet Trigger'
+        'body': 'Hello World!'
+
 # My functions
 
     # 数列の公式
@@ -315,6 +319,47 @@
         #   --> [('donut', 4), ('bread', 3), ('cheese', 2), ('apple', 1)]
         'prefix': 'sorted_dict_value_descending'
         'body': '${1:list} = sorted(${2:dict}.items(), key=lambda x: x[1], reverse=True)'
+
+# bisect
+    # https://docs.python.jp/3/library/bisect.html
+
+    'bisect.bisect_left':
+        # bisect_left(a, x, lo=0, hi=len(a))
+        # ソートされた順序を保ったまま x を a に挿入できる点を探し当てます。
+        # リストの中から検索する部分集合を指定するには、パラメータの lo と hi を使います。
+        # デフォルトでは、リスト全体が使われます。
+        # x がすでに a に含まれている場合、挿入点は既存のどのエントリーよりも前(左)になります。
+        # 戻り値は、list.insert() の第一引数として使うのに適しています。
+        # a はすでにソートされているものとします。
+        # a = [1, 9, 15, 32]
+        # bisect.bisect_left(a, 15) --> 2
+        'prefix': 'bisect_bisect_left'
+        'body': 'bisect.bisect_left(${1:a}, ${2:x})'
+
+    'bisect.bisect_right':
+        # bisect_right(a, x, lo=0, hi=len(a))
+        # bisect_left() と似ていますが、 a に含まれる x のうち、
+        # どのエントリーよりも後ろ(右)にくるような挿入点を返します。
+        # a = [1, 9, 15, 32]
+        # bisect.bisect_right(a, 15) --> 3
+        'prefix': 'bisect_bisect_right'
+        'body': 'bisect.bisect_right(${1:a}, ${2:x})'
+
+    'bisect.insort_left':
+        # x を a にソート順で挿入します。
+        # これは、a がすでにソートされている場合、a.insert(bisect.bisect_left(a, x, lo, hi), x) と等価です。
+        # a = [1, 9, 15, 32]
+        # bisect.bisect_left(a, 15) --> a = [1, 9, 15, 15, 32]
+        'prefix': 'bisect_insort_left'
+        'body': 'bisect.insort_left(${1:a}, ${2:x})'
+
+    'bisect.insort_right':
+        # insort_left() と似ていますが、 a に含まれる x のうち、
+        # どのエントリーよりも後ろに x を挿入します。
+        # a = [1, 9, 15, 32]
+        # bisect.bisect_right(a, 15) --> a = [1, 9, 15, 15, 32]
+        'prefix': 'bisect_insort_right'
+        'body': 'bisect.insort_right(${1:a}, ${2:x})'
 
 # itertools
     # https://docs.python.jp/3/library/itertools.html#module-itertools
