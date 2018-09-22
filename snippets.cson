@@ -45,7 +45,7 @@
 
 # My functions
 
-    # 数列の公式
+# 数列の公式
     'Sum of arithmetic series（等差数列の和）':
         # 等差数列の公式
         # 初項が a，末項が l，項数が n であるような等差数列の和は，(n(a+l))/2
@@ -120,6 +120,15 @@
         # ∑(k=1,∞)(1/k^6) = 1/1^6 + 1/2^6 + 1/3^6 + ⋯ = π^6/945
         'prefix': 'zeta_func_k6'
         'body': 'zeta_k2 = math.pi**6/945'
+
+# 文字列操作
+    's_change':
+        # 文字列sにおいて s[0] = "?" とやるとエラーが起きるので、その機能を提供する
+        # s_change("aiueo", 1, "?") --> "a?ueo"
+        # s_change("auieo", 1, "???") --> "a???o"
+        # s_change("aiueo", 100, "???") --> "aiueo???"
+        'prefix': 's_change'
+        'body': 's_change = lambda s1, i, s2: "{}{}{}".format(s1[:i], s2, s1[i+len(s2):])'
 
 # Input
     'Int-Input':
@@ -503,6 +512,27 @@
         #   --> (0,0,0) (0,0,1) (0,1,0) (0,1,1) (1,0,0) (1,0,1) (1,1,0) (1,1,1)
         'prefix': 'itertools_product'
         'body': 'itertools.product(${1:iterable}, ${2:repeat=1})'
+
+    'itertools.product_mask_s':
+        # 文字列s が 文字c でマスキングされるすべての組み合わせのリストを作成する
+        # product_s("atcoder", "?")
+        #   --> "atcoder", "atcode?", "atcod?r", "atcod??", "atco?er", ...
+        'prefix': 'itertools_product_mask_s'
+        'body': """
+        def product_mask_s(s, c):
+            import itertools
+            s_products = list(itertools.product(s, c))
+
+            s_masks = []
+            len_s = len(s)
+            for products in itertools.product(range(2), repeat=len_s):
+                t = ""
+                for i in range(len_s):
+                    t += s_products[i][products[i]]
+                s_masks.append(t)
+            return s_masks
+        """
+
 
 
 # collections
